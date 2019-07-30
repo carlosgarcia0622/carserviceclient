@@ -6,18 +6,23 @@ import { Observable } from 'rxjs';
 export class OwnerService {
 
   public API = '//thawing-chamber-47973.herokuapp.com';
-  public OWNER_API = this.API+'/owners';
+  public OWNERS_API = this.API+'/owners';
+  public OWNER_API = this.API+'/owner?dni=';
   
 
   constructor(private http: HttpClient) {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(this.OWNER_API);
+    return this.http.get(this.OWNERS_API);
   }
 
-  get(id: string) {
-    return this.http.get(this.OWNER_API + '/' + id);
+  getByDni(dni: string) {
+    return this.http.get(this.OWNER_API + dni);
+  }
+
+  getById(id:string){
+    return this.http.get(this.OWNERS_API + '/' + id);
   }
 
   save(owner: any): Observable<any> {
@@ -25,7 +30,7 @@ export class OwnerService {
     if (owner['href']) {
       result = this.http.put(owner.href, owner);
     } else {
-      result = this.http.post(this.OWNER_API, owner);
+      result = this.http.post(this.OWNERS_API, owner);
     }
     return result;
   }
