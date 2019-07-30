@@ -4,15 +4,16 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class OwnerService {
+
   public API = '//thawing-chamber-47973.herokuapp.com';
-  public OWNER_API = this.API + '/owners';
+  public OWNER_API = this.API+'/owners';
   
 
   constructor(private http: HttpClient) {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(this.API + '/cool-cars');
+    return this.http.get(this.OWNER_API);
   }
 
   get(id: string) {
